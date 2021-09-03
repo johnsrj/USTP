@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -12,9 +14,10 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI bulletCount;
     private AudioSource _audioSource;
     private GameManager _gameManager;
-    
-    // Start is called before the first frame update
-    void Start()
+
+    public List<Sprite> skins;
+
+    private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _collider = GetComponent<BoxCollider2D>();
@@ -22,6 +25,14 @@ public class Player : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         audioManager = FindObjectOfType<AudioManager>();
         _gameManager = FindObjectOfType<GameManager>();
+
+        _spriteRenderer.sprite = skins[PlayerPrefs.GetInt("skin", 0)];
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
     }
 
     // Update is called once per frame

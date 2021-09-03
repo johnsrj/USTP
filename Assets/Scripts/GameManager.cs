@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
         Destroy(spawners);
         totalScore.text = _score.ToString();
         gameOverScreen.SetActive(true);
-        FindObjectOfType<ScoreManager>().AddScore(new Score(_score, "Johnsrj"));
+        FindObjectOfType<ScoreManager>().AddScore(new Score(_score, PlayerPrefs.GetString("PlayerName")));
         FindObjectOfType<ScoreManager>().SaveScore();
     }
 

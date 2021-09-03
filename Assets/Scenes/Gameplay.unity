@@ -545,6 +545,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 519420031}
   bulletCount: {fileID: 1371924990}
+  skins:
+  - {fileID: 21300048, guid: db63fa1c2adceb141974024b30ffa6db, type: 3}
+  - {fileID: -5293652544787447840, guid: db63fa1c2adceb141974024b30ffa6db, type: 3}
+  - {fileID: 21300044, guid: db63fa1c2adceb141974024b30ffa6db, type: 3}
+  - {fileID: 21300042, guid: db63fa1c2adceb141974024b30ffa6db, type: 3}
+  - {fileID: 21300028, guid: db63fa1c2adceb141974024b30ffa6db, type: 3}
+  - {fileID: 21300022, guid: b92c2c26ebd072944bb67d1be7f6475e, type: 3}
+  - {fileID: 21300012, guid: b92c2c26ebd072944bb67d1be7f6475e, type: 3}
 --- !u!212 &239656531
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4193,7 +4201,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a37864b03033bfc44998c870967d528c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scores: []
 --- !u!4 &1121318043
 Transform:
   m_ObjectHideFlags: 0
@@ -5658,6 +5665,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 727148622}
   spawners: {fileID: 915738549}
   isPaused: 0
+  gameisOver: 0
 --- !u!4 &1677360821
 Transform:
   m_ObjectHideFlags: 0
