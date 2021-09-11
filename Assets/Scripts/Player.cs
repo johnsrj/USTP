@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI bulletCount;
     private AudioSource _audioSource;
     private GameManager _gameManager;
+    public GameObject spreader;
 
     public List<Sprite> skins;
 
@@ -27,13 +28,9 @@ public class Player : MonoBehaviour
         _gameManager = FindObjectOfType<GameManager>();
 
         _spriteRenderer.sprite = skins[PlayerPrefs.GetInt("skin", 0)];
+        spreader.SetActive(false);
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    
 
     // Update is called once per frame
     void Update()
@@ -62,9 +59,11 @@ public class Player : MonoBehaviour
         {
             _spriteRenderer.color = Color.green;
             _collider.enabled = true;
+            spreader.SetActive(true);
             audioManager.PlayShoot();
             yield return new WaitForSeconds(0.1f);
             _collider.enabled = false;
+            spreader.SetActive(false);
             _spriteRenderer.color = Color.yellow;
             bullets--;
         }

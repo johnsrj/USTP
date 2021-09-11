@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -6,17 +7,40 @@ using Random = UnityEngine.Random;
 
 public class SpawnerF : MonoBehaviour
 {
+    private GameManager gm;
     public GameObject[] enemies;
-    // Start is called before the first frame update
+
+    private void Awake()
+    {
+        gm = FindObjectOfType<GameManager>();
+    }
+
     void Start()
     {
+        
         StartCoroutine("Spawn");
     }
 
     IEnumerator Spawn()
     {
-        yield return new WaitForSeconds(Random.Range(2, 15));
-        Instantiate(enemies[Random.Range(0, enemies.Length - 1)], new Vector3(transform.position.x, transform.position.y, 0), transform.rotation);
+        if (gm.Score < 1000)
+        {
+            yield return new WaitForSeconds(Random.Range(1, 15)); 
+        }
+        else if (gm.Score < 5000)
+        {
+            yield return new WaitForSeconds(Random.Range(1, 12));
+        }
+        else if (gm.Score < 10000)
+        {
+            yield return new WaitForSeconds(Random.Range(1, 8));
+        }
+        else
+        {
+            yield return new WaitForSeconds(Random.Range(1, 5));
+        }
+        
+        Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(transform.position.x, transform.position.y, 0), transform.rotation);
         StartCoroutine("Spawn");
     }
 }

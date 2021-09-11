@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 
-    private int _score;
+    [SerializeField] private int _score;
     public TextMeshProUGUI ScoreText;
     public GameObject[] Hearts;
     private int health;
@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverScreen;
     public TextMeshProUGUI totalScore;
     public GameObject HI;
+    private AudioManager audio;
 
     public GameObject pauseMenu;
 
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
     {
         Score = 0;
         health = Hearts.Length;
+        audio = FindObjectOfType<AudioManager>();
     }
 
     private void Update()
@@ -61,8 +63,9 @@ public class GameManager : MonoBehaviour
 
     public void LoseHeart()
     {
-        if (health > 0)
+        if (health > 1)
         {
+            audio.Play("LoseLife");
             Hearts[health - 1].SetActive(false);
             health--;
         }
@@ -74,13 +77,16 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
+        audio.Play("LoseLife");
         gameisOver = true;
         Destroy(FindObjectOfType<Player>());
         Destroy(spawners);
         totalScore.text = _score.ToString();
         gameOverScreen.SetActive(true);
+        if (_score <= 0) return;
         FindObjectOfType<ScoreManager>().AddScore(new Score(_score, PlayerPrefs.GetString("PlayerName")));
         FindObjectOfType<ScoreManager>().SaveScore();
+
     }
 
     public void PlayAgain()
