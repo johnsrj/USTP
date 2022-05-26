@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
@@ -87,6 +88,11 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<ScoreManager>().AddScore(new Score(_score, PlayerPrefs.GetString("PlayerName")));
         FindObjectOfType<ScoreManager>().SaveScore();
 
+    }
+
+    public void OnClickSendScore()
+    {
+        FindObjectOfType<ScoreManager>().SendScore(new Score(_score, PlayerPrefs.GetString("PlayerName")));
     }
 
     public void PlayAgain()

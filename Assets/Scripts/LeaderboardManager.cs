@@ -15,6 +15,12 @@ public class LeaderboardManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Menu")
         {
+#if UNITY_WEBGL
+            for (int i = 0; i < 10; i++)
+            {
+                
+            }
+#else
             for (int i = 0; i < 7; i++)
             {
                 string leaderboardNamei = "leaderboardName" + i.ToString();
@@ -43,6 +49,7 @@ public class LeaderboardManager : MonoBehaviour
                     //scores[i].UpdateUI();
                 }
             }
+#endif
         }
         
     }

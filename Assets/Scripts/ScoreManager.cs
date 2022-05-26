@@ -8,9 +8,13 @@ using UnityEngine.SceneManagement;
 public class ScoreManager : MonoBehaviour
 {
     private ScoreData sd;
+#if UNITY_WEBGL
+    private WebGLSendContractExample smartContract;
+#endif
 
     private void Awake()
     {
+#if !UNITY_WEBGL
         if (PlayerPrefs.HasKey("scores"))
         {
             var json = PlayerPrefs.GetString("scores");
@@ -22,7 +26,10 @@ public class ScoreManager : MonoBehaviour
         {
             sd = new ScoreData();
         }
+#else
+        smartContract = gameObject.GetComponent<WebGLSendContractExample>();
         
+#endif
     }
 
     public IEnumerable<Score> GetHighScores()
@@ -32,12 +39,21 @@ public class ScoreManager : MonoBehaviour
 
     public void AddScore(Score score)
     {
+#if !UNITY_WEBGL
         sd.scores.Add(score);
+#endif
+    }
+
+    public void SendScore(Score score)
+    {
+        gameObject.GetComponent<WebGLSendContractExample>().OnSendContract(score.score, score.name);
     }
 
     private void OnDestroy()
     {
+#if !UNITY_WEBGL
         SaveScore();
+#endif
     }
 
     public void SaveScore()
