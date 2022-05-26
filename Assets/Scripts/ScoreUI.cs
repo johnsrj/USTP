@@ -13,7 +13,6 @@ public class ScoreUI : MonoBehaviour
 #if UNITY_WEBGL
         for (int i = 0; i < 10; i++)
         {
-            
             var row = Instantiate(rowUI, transform).GetComponent<RowUI>();
             row.rank.text = "#" + (i + 1).ToString();
             row.name.text = FindObjectOfType<WebGLSendContractExample>().OnCallContract(i).Result.name;

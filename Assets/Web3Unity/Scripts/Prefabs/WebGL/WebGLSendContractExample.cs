@@ -47,9 +47,15 @@ public class WebGLSendContractExample : MonoBehaviour
             await EVM.Call(chain, network, "0xda1E1FfF58C2Ea4d836682ae13B016a71C92b71F", abi, method, args);
         Debug.Log(response);
 
-        Score nameObject = JsonConvert.DeserializeObject<Score>(response);
-
-        return nameObject;
+        MyInfo nameObject = JsonConvert.DeserializeObject<MyInfo>(response);
+        Score sc = new Score(nameObject.Score, nameObject.User);
+        return sc;
     }
 }
 #endif
+
+class MyInfo
+{
+    public string User { get; set; }
+    public int Score { get; set; }
+}
